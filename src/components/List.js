@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
 import { connect } from "react-redux";
 import { NotificationOutlined } from "@ant-design/icons";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import getLibrariesInfo from "../api/getLibrariesInfo";
 import Library from "../components/Library";
@@ -48,7 +48,12 @@ const List = ({ librariesInfo }) => {
                 {librariesInfo.map((region) => (
                   <Menu.Item key={region.kopuk}>
                     {region.territory}
-                    <Link to={`/${region.kopuk}`} />
+                    <Link
+                      to={{
+                        pathname: `/${region.kopuk}`,
+                        state: { regionInfo: region },
+                      }}
+                    />
                   </Menu.Item>
                 ))}
               </SubMenu>
@@ -68,7 +73,9 @@ const List = ({ librariesInfo }) => {
                 minHeight: 280,
               }}
             >
-              <Route path="/:id" component={Library} />
+              <Switch>
+                <Route path={"/:id"} component={Library} />
+              </Switch>
             </Content>
           </Layout>
         </Layout>

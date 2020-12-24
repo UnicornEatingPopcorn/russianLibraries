@@ -1,40 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router";
-import { Descriptions, Badge } from "antd";
+import { Descriptions } from "antd";
 
 const Libraries = (props) => {
+  const [info, setInfo] = useState({});
+
+  useEffect(() => {
+    setInfo(props.location.state.regionInfo);
+  }, [props]);
+
   return (
     <Descriptions
-      title={`Информация по библиотекам региона ${props.match.params.id}`}
+      title={`Информация по библиотекам региона ${info.territory}`}
+      key={props.match.params.id}
       bordered
     >
-      <Descriptions.Item label="Адрес">Cloud Database</Descriptions.Item>
-      <Descriptions.Item label="Billing Mode">Prepaid</Descriptions.Item>
-      <Descriptions.Item label="Automatic Renewal">YES</Descriptions.Item>
-      <Descriptions.Item label="Order time">
-        2018-04-24 18:00:00
+      <Descriptions.Item label="Адрес">{info.address}</Descriptions.Item>
+      <Descriptions.Item label="Официальное название" span={2}>
+        {info.formname}
       </Descriptions.Item>
-      <Descriptions.Item label="Usage Time" span={2}>
-        2019-04-24 18:00:00
+      <Descriptions.Item label="Полное наименование">
+        {info.fullname}
       </Descriptions.Item>
-      <Descriptions.Item label="Status" span={3}>
-        <Badge status="processing" text="Running" />
+      <Descriptions.Item label="Количество библиотек">
+        {info.libraries}
       </Descriptions.Item>
-      <Descriptions.Item label="Negotiated Amount">$80.00</Descriptions.Item>
-      <Descriptions.Item label="Discount">$20.00</Descriptions.Item>
-      <Descriptions.Item label="Official Receipts">$60.00</Descriptions.Item>
-      <Descriptions.Item label="Config Info">
-        Data disk type: MongoDB
-        <br />
-        Database version: 3.4
-        <br />
-        Package: dds.mongo.mid
-        <br />
-        Storage space: 10 GB
-        <br />
-        Replication factor: 3
-        <br />
-        Region: East China 1<br />
+      <Descriptions.Item label="Статистические данные за">
+        {info.period}
+      </Descriptions.Item>
+      <Descriptions.Item label="Количество работников">
+        {info.employees}
+      </Descriptions.Item>
+      <Descriptions.Item label="Количество высококвалифицированных сотрудников">
+        {info.staff_higheeducated}
+      </Descriptions.Item>
+      <Descriptions.Item label="Количество посетителей">
+        {info.users}
       </Descriptions.Item>
     </Descriptions>
   );
