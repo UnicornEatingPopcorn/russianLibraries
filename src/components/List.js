@@ -36,9 +36,7 @@ const List = ({ librariesInfo }) => {
           <CustomSider info={librariesInfo} />
           <Layout style={{ padding: "0 24px 24px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>
-                Количество библиотек по выбранному региону
-              </Breadcrumb.Item>
+              <Breadcrumb.Item>Информация по библиотекам</Breadcrumb.Item>
             </Breadcrumb>
             <Content
               className="site-layout-background"
@@ -49,7 +47,7 @@ const List = ({ librariesInfo }) => {
               }}
             >
               <Switch>
-                <Route path={"/all-libraries"} component={FullStat}/>
+                <Route path={"/all-libraries"} component={FullStat} />
                 <Route path={"/:id"} component={Libraries} />
               </Switch>
             </Content>
