@@ -10,7 +10,7 @@ const FullStatisticList = (props) => {
 
   const columns = [
     {
-      title: "Название библиотеки",
+      title: "Государственный орган, предоставивший данные",
       dataIndex: "fullname",
     },
     {
