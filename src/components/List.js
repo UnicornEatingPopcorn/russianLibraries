@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
 import { connect } from "react-redux";
-import { NotificationOutlined } from "@ant-design/icons";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import getLibrariesInfo from "../api/getLibrariesInfo";
-import Library from "../components/Library";
+import CustomSider from "../components/Sider";
+import Libraries from "../components/Libraries";
+import FullStat from "../components/FullStatisticList";
 
-const { Header, Content, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Header, Content } = Layout;
 
 const mapStateToProps = (state) => ({
   librariesInfo: state.librariesInfo,
@@ -33,32 +33,7 @@ const List = ({ librariesInfo }) => {
           </Menu>
         </Header>
         <Layout>
-          <Sider width={200} className="site-layout-background">
-            <Menu
-              mode="inline"
-              defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["sub1"]}
-              style={{ height: "100%", borderRight: 0 }}
-            >
-              <SubMenu
-                key="sub3"
-                icon={<NotificationOutlined />}
-                title="Регионы"
-              >
-                {librariesInfo.map((region) => (
-                  <Menu.Item key={region.kopuk}>
-                    {region.territory}
-                    <Link
-                      to={{
-                        pathname: `/${region.kopuk}`,
-                        state: { regionInfo: region },
-                      }}
-                    />
-                  </Menu.Item>
-                ))}
-              </SubMenu>
-            </Menu>
-          </Sider>
+          <CustomSider info={librariesInfo} />
           <Layout style={{ padding: "0 24px 24px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>
@@ -74,7 +49,8 @@ const List = ({ librariesInfo }) => {
               }}
             >
               <Switch>
-                <Route path={"/:id"} component={Library} />
+                <Route path={"/all-libraries"} component={FullStat}/>
+                <Route path={"/:id"} component={Libraries} />
               </Switch>
             </Content>
           </Layout>

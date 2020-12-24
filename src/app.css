@@ -1,3 +1,8 @@
 .site-layout-background {
   background: #fff;
 }
+
+.site-layout-scroll {
+  height: 90vh;
+  overflow: scroll;
+}
